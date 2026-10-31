@@ -1,0 +1,356 @@
+{
+  "generated_at": "2026-10-31T04:06:52+00:00",
+  "python": "3.11.9",
+  "execution_mode": "mock",
+  "cases": [
+    {
+      "name": "clear_answer",
+      "label": "明确答案",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "30天"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销提交期限为30天。",
+      "steps_taken": 6,
+      "input": "clear_answer.input.json",
+      "data": "clear_answer.data.json",
+      "output": "clear_answer.output.json",
+      "trace": "clear_answer.trace.json"
+    },
+    {
+      "name": "document_conflict",
+      "label": "文档冲突",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "needs_clarification",
+        "citation_values": [
+          "15",
+          "30"
+        ]
+      },
+      "actual_status": "needs_clarification",
+      "answer": "资料存在冲突，暂不能给出唯一答案。",
+      "steps_taken": 7,
+      "input": "document_conflict.input.json",
+      "data": "document_conflict.data.json",
+      "output": "document_conflict.output.json",
+      "trace": "document_conflict.trace.json"
+    },
+    {
+      "name": "out_of_corpus",
+      "label": "资料外问题",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "insufficient_evidence",
+        "citation_count": 0
+      },
+      "actual_status": "insufficient_evidence",
+      "answer": "现有资料不足以可靠回答该问题。",
+      "steps_taken": 5,
+      "input": "out_of_corpus.input.json",
+      "data": "out_of_corpus.data.json",
+      "output": "out_of_corpus.output.json",
+      "trace": "out_of_corpus.trace.json"
+    },
+    {
+      "name": "paraphrase",
+      "label": "改写相似问题",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "30天",
+        "supplemental_search": true
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销提交期限为30天。",
+      "steps_taken": 7,
+      "input": "paraphrase.input.json",
+      "data": "paraphrase.data.json",
+      "output": "paraphrase.output.json",
+      "trace": "paraphrase.trace.json"
+    },
+    {
+      "name": "context_followup",
+      "label": "上下文追问",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "电子发票和审批记录"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销所需材料为电子发票和审批记录。",
+      "steps_taken": 6,
+      "input": "context_followup.input.json",
+      "data": "context_followup.data.json",
+      "output": "context_followup.output.json",
+      "trace": "context_followup.trace.json"
+    },
+    {
+      "name": "tool_failure",
+      "label": "读取工具失败",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "failed",
+        "has_tool_errors": true
+      },
+      "actual_status": "failed",
+      "answer": "检索或读取工具失败，尚不能完成可靠核实。",
+      "steps_taken": 6,
+      "input": "tool_failure.input.json",
+      "data": "tool_failure.data.json",
+      "output": "tool_failure.output.json",
+      "trace": "tool_failure.trace.json"
+    },
+    {
+      "name": "changed_source",
+      "label": "替换原文 30→45",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "45天"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销提交期限为45天。",
+      "steps_taken": 6,
+      "input": "changed_source.input.json",
+      "data": "changed_source.data.json",
+      "output": "changed_source.output.json",
+      "trace": "changed_source.trace.json"
+    },
+    {
+      "name": "consistent_documents",
+      "label": "文档结论一致",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "30天"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销提交期限为30天。",
+      "steps_taken": 7,
+      "input": "consistent_documents.input.json",
+      "data": "consistent_documents.data.json",
+      "output": "consistent_documents.output.json",
+      "trace": "consistent_documents.trace.json"
+    },
+    {
+      "name": "user_selected_policy",
+      "label": "用户确认适用D01",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "30天",
+        "citation_docs": [
+          "D01"
+        ]
+      },
+      "actual_status": "answered",
+      "answer": "按您指定的D01，报销提交期限为30天。",
+      "steps_taken": 7,
+      "input": "user_selected_policy.input.json",
+      "data": "user_selected_policy.data.json",
+      "output": "user_selected_policy.output.json",
+      "trace": "user_selected_policy.trace.json"
+    },
+    {
+      "name": "explicit_precedence",
+      "label": "原文明示替代关系",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "15天",
+        "citation_docs": [
+          "D02"
+        ]
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销提交期限为15天。",
+      "steps_taken": 7,
+      "input": "explicit_precedence.input.json",
+      "data": "explicit_precedence.data.json",
+      "output": "explicit_precedence.output.json",
+      "trace": "explicit_precedence.trace.json"
+    },
+    {
+      "name": "scope_missing",
+      "label": "缺少员工适用范围",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "needs_clarification"
+      },
+      "actual_status": "needs_clarification",
+      "answer": "需要补充信息后才能给出可靠答案。",
+      "steps_taken": 7,
+      "input": "scope_missing.input.json",
+      "data": "scope_missing.data.json",
+      "output": "scope_missing.output.json",
+      "trace": "scope_missing.trace.json"
+    },
+    {
+      "name": "scope_selected",
+      "label": "已提供总部范围",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "30天"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销提交期限为30天。",
+      "steps_taken": 7,
+      "input": "scope_selected.input.json",
+      "data": "scope_selected.data.json",
+      "output": "scope_selected.output.json",
+      "trace": "scope_selected.trace.json"
+    },
+    {
+      "name": "search_failure",
+      "label": "检索工具失败",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "failed",
+        "has_tool_errors": true
+      },
+      "actual_status": "failed",
+      "answer": "检索或读取工具失败，尚不能完成可靠核实。",
+      "steps_taken": 3,
+      "input": "search_failure.input.json",
+      "data": "search_failure.data.json",
+      "output": "search_failure.output.json",
+      "trace": "search_failure.trace.json"
+    },
+    {
+      "name": "invalid_selection",
+      "label": "指定无效文档",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "needs_clarification"
+      },
+      "actual_status": "needs_clarification",
+      "answer": "需要补充信息后才能给出可靠答案。",
+      "steps_taken": 7,
+      "input": "invalid_selection.input.json",
+      "data": "invalid_selection.data.json",
+      "output": "invalid_selection.output.json",
+      "trace": "invalid_selection.trace.json"
+    },
+    {
+      "name": "step_limit",
+      "label": "达到步数上限",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "incomplete",
+        "stop_reason": "step_limit_reached"
+      },
+      "actual_status": "incomplete",
+      "answer": "任务尚未完成，不能确认可靠答案。",
+      "steps_taken": 3,
+      "input": "step_limit.input.json",
+      "data": "step_limit.data.json",
+      "output": "step_limit.output.json",
+      "trace": "step_limit.trace.json"
+    },
+    {
+      "name": "prompt_injection",
+      "label": "资料含不可信指令",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "30天"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，报销提交期限为30天。",
+      "steps_taken": 6,
+      "input": "prompt_injection.input.json",
+      "data": "prompt_injection.data.json",
+      "output": "prompt_injection.output.json",
+      "trace": "prompt_injection.trace.json"
+    },
+    {
+      "name": "unparseable_related",
+      "label": "相关资料无法核验",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "insufficient_evidence"
+      },
+      "actual_status": "insufficient_evidence",
+      "answer": "现有资料不足以可靠回答该问题。",
+      "steps_taken": 9,
+      "input": "unparseable_related.input.json",
+      "data": "unparseable_related.data.json",
+      "output": "unparseable_related.output.json",
+      "trace": "unparseable_related.trace.json"
+    },
+    {
+      "name": "context_missing",
+      "label": "追问缺少上下文",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "needs_clarification"
+      },
+      "actual_status": "needs_clarification",
+      "answer": "需要补充信息后才能给出可靠答案。",
+      "steps_taken": 2,
+      "input": "context_missing.input.json",
+      "data": "context_missing.data.json",
+      "output": "context_missing.output.json",
+      "trace": "context_missing.trace.json"
+    },
+    {
+      "name": "annual_leave",
+      "label": "年假FAQ",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "10天"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，年度带薪年假为10天。",
+      "steps_taken": 5,
+      "input": "annual_leave.input.json",
+      "data": "annual_leave.data.json",
+      "output": "annual_leave.output.json",
+      "trace": "annual_leave.trace.json"
+    },
+    {
+      "name": "export_resolution",
+      "label": "产品FAQ",
+      "passed": true,
+      "errors": [],
+      "expected": {
+        "status": "answered",
+        "answer_contains": "1080p"
+      },
+      "actual_status": "answered",
+      "answer": "依据已核验的资料，产品导出分辨率为1080p。",
+      "steps_taken": 5,
+      "input": "export_resolution.input.json",
+      "data": "export_resolution.data.json",
+      "output": "export_resolution.output.json",
+      "trace": "export_resolution.trace.json"
+    }
+  ],
+  "passed": 20,
+  "total": 20,
+  "wall_seconds": 0.032
+}

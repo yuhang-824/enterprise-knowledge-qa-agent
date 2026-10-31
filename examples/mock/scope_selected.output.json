@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-31T04:06:52+00:00",
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "requested_model": "offline-evidence-policy-v1",
+  "corpus_version": "synthetic-kb-v1",
+  "corpus_digest": "f0e8e32caac1bc2ac4c0089806ef58bf6e0e7f215996891869e459c12fa4638b",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "steps_taken": 7,
+  "max_steps": 24,
+  "stop_reason": "model_concluded:answered",
+  "model_api_usage": null,
+  "request": {
+    "request_id": "scope_selected",
+    "question": "报销期限是多久？",
+    "history": [],
+    "applicable_doc_id": null,
+    "scope": "总部"
+  },
+  "intent": {
+    "claim_key": "reimbursement_deadline",
+    "topic_candidates": [
+      "reimbursement_deadline"
+    ],
+    "needs_topic_clarification": false,
+    "used_user_history": false,
+    "resolved_question": "报销期限是多久？",
+    "suggested_query": "报销 期限"
+  },
+  "searches": [
+    {
+      "query": "报销期限是多久？",
+      "hits": [
+        {
+          "doc_id": "D01",
+          "title": "员工费用报销制度",
+          "version_date": "2025-01-01",
+          "scope": "总部",
+          "score": 2,
+          "snippets": [
+            {
+              "chunk_id": "C01",
+              "preview": "报销提交期限为30天。员工应在业务发生后提交申请。适用范围：总部员工。"
+            },
+            {
+              "chunk_id": "C02",
+              "preview": "报销所需材料为电子发票和审批记录。材料完整后提交财务审核。"
+            }
+          ]
+        },
+        {
+          "doc_id": "D02",
+          "title": "费用报销补充规定",
+          "version_date": "2025-06-01",
+          "scope": "分公司",
+          "score": 2,
+          "snippets": [
+            {
+              "chunk_id": "C01",
+              "preview": "报销提交期限为15天。逾期申请需说明原因。适用范围：分公司员工。"
+            }
+          ]
+        }
+      ],
+      "total": 2,
+      "has_more": false,
+      "strategy": "keyword",
+      "effective_query": "报销期限是多久？",
+      "suggested_query": "报销 期限"
+    }
+  ],
+  "sources_read": [
+    {
+      "source_id": "D01:C01:6ea4ed3d4d98",
+      "doc_id": "D01",
+      "chunk_id": "C01",
+      "title": "员工费用报销制度",
+      "version_date": "2025-01-01",
+      "scope": "总部",
+      "content_hash": "6ea4ed3d4d98312c038a8b2c3272037cf8eea65c8cf309a1a567109558a5df3e",
+      "quote": "报销提交期限为30天。员工应在业务发生后提交申请。适用范围：总部员工。",
+      "claims": [
+        {
+          "key": "reimbursement_deadline",
+          "value": "30",
+          "unit": "天",
+          "supporting_quote": "报销提交期限为30天",
+          "supersedes": []
+        }
+      ]
+    },
+    {
+      "source_id": "D01:C02:2afc265118f0",
+      "doc_id": "D01",
+      "chunk_id": "C02",
+      "title": "员工费用报销制度",
+      "version_date": "2025-01-01",
+      "scope": "总部",
+      "content_hash": "2afc265118f01824d76e009c6a9ab276a28adea880072330d93019ea787983eb",
+      "quote": "报销所需材料为电子发票和审批记录。材料完整后提交财务审核。",
+      "claims": [
+        {
+          "key": "reimbursement_materials",
+          "value": "电子发票和审批记录",
+          "unit": "",
+          "supporting_quote": "报销所需材料为电子发票和审批记录",
+          "supersedes": []
+        }
+      ]
+    },
+    {
+      "source_id": "D02:C01:95b297aac18e",
+      "doc_id": "D02",
+      "chunk_id": "C01",
+      "title": "费用报销补充规定",
+      "version_date": "2025-06-01",
+      "scope": "分公司",
+      "content_hash": "95b297aac18e237f45fc8ab7506f8b290e56f364a26f7d267836fb6743854bbc",
+      "quote": "报销提交期限为15天。逾期申请需说明原因。适用范围：分公司员工。",
+      "claims": [
+        {
+          "key": "reimbursement_deadline",
+          "value": "15",
+          "unit": "天",
+          "supporting_quote": "报销提交期限为15天",
+          "supersedes": []
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "status": "supported",
+    "claim_key": "reimbursement_deadline",
+    "missing_snippets": [],
+    "citations": [
+      {
+        "source_id": "D01:C01:6ea4ed3d4d98",
+        "doc_id": "D01",
+        "chunk_id": "C01",
+        "title": "员工费用报销制度",
+        "version_date": "2025-01-01",
+        "scope": "总部",
+        "content_hash": "6ea4ed3d4d98312c038a8b2c3272037cf8eea65c8cf309a1a567109558a5df3e",
+        "quote": "报销提交期限为30天。员工应在业务发生后提交申请。适用范围：总部员工。",
+        "claim_key": "reimbursement_deadline",
+        "value": "30",
+        "unit": "天",
+        "supporting_quote": "报销提交期限为30天"
+      }
+    ],
+    "conflicts": [],
+    "gaps": [],
+    "supporting_source_ids": [
+      "D01:C01:6ea4ed3d4d98"
+    ],
+    "value": "30",
+    "unit": "天"
+  },
+  "tool_errors": [],
+  "status": "answered",
+  "answer": "依据已核验的资料，报销提交期限为30天。",
+  "citations": [
+    {
+      "source_id": "D01:C01:6ea4ed3d4d98",
+      "doc_id": "D01",
+      "chunk_id": "C01",
+      "title": "员工费用报销制度",
+      "version_date": "2025-01-01",
+      "scope": "总部",
+      "content_hash": "6ea4ed3d4d98312c038a8b2c3272037cf8eea65c8cf309a1a567109558a5df3e",
+      "quote": "报销提交期限为30天。员工应在业务发生后提交申请。适用范围：总部员工。",
+      "claim_key": "reimbursement_deadline",
+      "value": "30",
+      "unit": "天",
+      "supporting_quote": "报销提交期限为30天"
+    }
+  ],
+  "gaps": [],
+  "conflicts": [],
+  "clarification": null
+}

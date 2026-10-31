@@ -1,0 +1,83 @@
+{
+  "version": "synthetic-kb-v1",
+  "description": "全部为合成制度与FAQ，无真实企业资料。D01与D02的冲突故意保留；日期不代表优先级。",
+  "documents": [
+    {
+      "id": "D01",
+      "title": "员工费用报销制度",
+      "version_date": "2025-01-01",
+      "active": true,
+      "scope": null,
+      "topics": [
+        "reimbursement_deadline",
+        "reimbursement_materials"
+      ],
+      "chunks": [
+        {
+          "id": "C01",
+          "text": "报销提交期限为30天。员工应在业务发生后提交申请。"
+        },
+        {
+          "id": "C02",
+          "text": "报销所需材料为电子发票和审批记录。材料完整后提交财务审核。"
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "title": "费用报销补充规定",
+      "version_date": "2025-06-01",
+      "active": true,
+      "scope": null,
+      "topics": [
+        "reimbursement_deadline"
+      ],
+      "chunks": [
+        {
+          "id": "C01",
+          "text": "报销提交期限为15天。逾期申请需说明原因。"
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "title": "员工休假FAQ",
+      "version_date": "2025-03-01",
+      "active": true,
+      "scope": null,
+      "topics": [
+        "annual_leave"
+      ],
+      "chunks": [
+        {
+          "id": "C01",
+          "text": "年度带薪年假为10天。本示例不涵盖婚假或其他假期。"
+        }
+      ]
+    },
+    {
+      "id": "D04",
+      "title": "视频产品导出FAQ",
+      "version_date": "2025-08-01",
+      "active": true,
+      "scope": null,
+      "topics": [
+        "export_resolution"
+      ],
+      "chunks": [
+        {
+          "id": "C01",
+          "text": "最高导出分辨率为1080p。此限制针对本合成FAQ所述的基础版本。"
+        }
+      ]
+    }
+  ],
+  "failures": {
+    "read_snippet": {
+      "times": 99,
+      "doc_ids": [
+        "D02"
+      ]
+    }
+  }
+}

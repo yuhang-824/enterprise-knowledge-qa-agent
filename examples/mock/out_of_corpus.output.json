@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-31T04:06:52+00:00",
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "requested_model": "offline-evidence-policy-v1",
+  "corpus_version": "synthetic-kb-v1",
+  "corpus_digest": "3ff689d5e3223572a4b78fdb4a1e1af60a26b22454d9faf24d2c431b59c193f8",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "steps_taken": 5,
+  "max_steps": 24,
+  "stop_reason": "model_concluded:insufficient_evidence",
+  "model_api_usage": null,
+  "request": {
+    "request_id": "out_of_corpus",
+    "question": "公司明年股票价格是多少？",
+    "history": [],
+    "applicable_doc_id": null,
+    "scope": null
+  },
+  "intent": {
+    "claim_key": null,
+    "topic_candidates": [],
+    "needs_topic_clarification": false,
+    "used_user_history": false,
+    "resolved_question": "公司明年股票价格是多少？",
+    "suggested_query": "公司明年股票价格是多少？"
+  },
+  "searches": [
+    {
+      "query": "公司明年股票价格是多少？",
+      "hits": [],
+      "total": 0,
+      "has_more": false,
+      "strategy": "keyword",
+      "effective_query": "公司明年股票价格是多少？",
+      "suggested_query": "公司明年股票价格是多少？"
+    },
+    {
+      "query": "公司明年股票价格是多少？",
+      "hits": [],
+      "total": 0,
+      "has_more": false,
+      "strategy": "expanded",
+      "effective_query": "公司明年股票价格是多少？",
+      "suggested_query": "公司明年股票价格是多少？"
+    }
+  ],
+  "sources_read": [],
+  "assessment": {
+    "status": "insufficient",
+    "claim_key": null,
+    "missing_snippets": [],
+    "citations": [],
+    "conflicts": [],
+    "gaps": [
+      "现有知识库没有支持该问题的可核实资料。"
+    ],
+    "supporting_source_ids": []
+  },
+  "tool_errors": [],
+  "status": "insufficient_evidence",
+  "answer": "现有资料不足以可靠回答该问题。",
+  "citations": [],
+  "conflicts": [],
+  "gaps": [
+    "现有知识库没有支持该问题的可核实资料。"
+  ],
+  "clarification": null
+}

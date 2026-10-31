@@ -1,0 +1,206 @@
+{
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "inspect_question",
+      "arguments": {
+        "reason": "先明确当前问题与必要用户上下文。"
+      },
+      "decision_basis": "先明确当前问题与必要用户上下文。",
+      "observation": {
+        "ok": true,
+        "request": {
+          "request_id": "annual_leave",
+          "question": "年假有几天？",
+          "history": [],
+          "applicable_doc_id": null,
+          "scope": null
+        },
+        "intent": {
+          "claim_key": "annual_leave",
+          "topic_candidates": [
+            "annual_leave"
+          ],
+          "needs_topic_clarification": false,
+          "used_user_history": false,
+          "resolved_question": "年假有几天？",
+          "suggested_query": "年假 天数"
+        },
+        "supported_topics": {
+          "reimbursement_deadline": {
+            "label": "报销提交期限",
+            "query": "报销 期限",
+            "domain": "报销"
+          },
+          "reimbursement_materials": {
+            "label": "报销所需材料",
+            "query": "报销 材料",
+            "domain": "报销"
+          },
+          "annual_leave": {
+            "label": "年度带薪年假",
+            "query": "年假 天数",
+            "domain": "年假"
+          },
+          "export_resolution": {
+            "label": "产品导出分辨率",
+            "query": "导出 分辨率",
+            "domain": "导出"
+          }
+        },
+        "conversation_is_evidence": false
+      },
+      "next_action": "search_documents"
+    },
+    {
+      "step": 2,
+      "tool": "search_documents",
+      "arguments": {
+        "query": "年假有几天？",
+        "strategy": "keyword",
+        "limit": 10,
+        "reason": "先按当前问题检索原始资料。"
+      },
+      "decision_basis": "先按当前问题检索原始资料。",
+      "observation": {
+        "ok": true,
+        "hits": [
+          {
+            "doc_id": "D03",
+            "title": "员工休假FAQ",
+            "version_date": "2025-03-01",
+            "scope": null,
+            "score": 1,
+            "snippets": [
+              {
+                "chunk_id": "C01",
+                "preview": "年度带薪年假为10天。本示例不涵盖婚假或其他假期。"
+              }
+            ]
+          }
+        ],
+        "total": 1,
+        "has_more": false,
+        "strategy": "keyword",
+        "effective_query": "年假有几天？",
+        "suggested_query": "年假 天数"
+      },
+      "next_action": "read_snippet"
+    },
+    {
+      "step": 3,
+      "tool": "read_snippet",
+      "arguments": {
+        "doc_id": "D03",
+        "chunk_id": "C01",
+        "reason": "读取检索命中的原文，建立可核验引用。"
+      },
+      "decision_basis": "读取检索命中的原文，建立可核验引用。",
+      "observation": {
+        "ok": true,
+        "source": {
+          "source_id": "D03:C01:263777dda80e",
+          "doc_id": "D03",
+          "chunk_id": "C01",
+          "title": "员工休假FAQ",
+          "version_date": "2025-03-01",
+          "scope": null,
+          "content_hash": "263777dda80eff26a9778964de6abc7383152d993ccb046f58b50982f6b490c7",
+          "quote": "年度带薪年假为10天。本示例不涵盖婚假或其他假期。",
+          "claims": [
+            {
+              "key": "annual_leave",
+              "value": "10",
+              "unit": "天",
+              "supporting_quote": "年度带薪年假为10天",
+              "supersedes": []
+            }
+          ]
+        },
+        "cached": false
+      },
+      "next_action": "check_evidence"
+    },
+    {
+      "step": 4,
+      "tool": "check_evidence",
+      "arguments": {
+        "reason": "原文已读取，核对覆盖、适用范围和结论冲突。"
+      },
+      "decision_basis": "原文已读取，核对覆盖、适用范围和结论冲突。",
+      "observation": {
+        "ok": true,
+        "assessment": {
+          "status": "supported",
+          "claim_key": "annual_leave",
+          "missing_snippets": [],
+          "citations": [
+            {
+              "source_id": "D03:C01:263777dda80e",
+              "doc_id": "D03",
+              "chunk_id": "C01",
+              "title": "员工休假FAQ",
+              "version_date": "2025-03-01",
+              "scope": null,
+              "content_hash": "263777dda80eff26a9778964de6abc7383152d993ccb046f58b50982f6b490c7",
+              "quote": "年度带薪年假为10天。本示例不涵盖婚假或其他假期。",
+              "claim_key": "annual_leave",
+              "value": "10",
+              "unit": "天",
+              "supporting_quote": "年度带薪年假为10天"
+            }
+          ],
+          "conflicts": [],
+          "gaps": [],
+          "supporting_source_ids": [
+            "D03:C01:263777dda80e"
+          ],
+          "value": "10",
+          "unit": "天"
+        },
+        "suggested_query": "年假 天数"
+      },
+      "next_action": "answer_question"
+    },
+    {
+      "step": 5,
+      "tool": "answer_question",
+      "arguments": {
+        "claim_key": "annual_leave",
+        "source_ids": [
+          "D03:C01:263777dda80e"
+        ],
+        "reason": "已读原文支持同一结论，按核验后的引用作答。"
+      },
+      "decision_basis": "已读原文支持同一结论，按核验后的引用作答。",
+      "observation": {
+        "ok": true,
+        "status": "answered",
+        "answer": "依据已核验的资料，年度带薪年假为10天。",
+        "citations": [
+          {
+            "source_id": "D03:C01:263777dda80e",
+            "doc_id": "D03",
+            "chunk_id": "C01",
+            "title": "员工休假FAQ",
+            "version_date": "2025-03-01",
+            "scope": null,
+            "content_hash": "263777dda80eff26a9778964de6abc7383152d993ccb046f58b50982f6b490c7",
+            "quote": "年度带薪年假为10天。本示例不涵盖婚假或其他假期。",
+            "claim_key": "annual_leave",
+            "value": "10",
+            "unit": "天",
+            "supporting_quote": "年度带薪年假为10天"
+          }
+        ],
+        "gaps": [],
+        "conflicts": [],
+        "clarification": null
+      },
+      "next_action": "end"
+    }
+  ]
+}

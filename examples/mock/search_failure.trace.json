@@ -1,0 +1,96 @@
+{
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "inspect_question",
+      "arguments": {
+        "reason": "先明确当前问题与必要用户上下文。"
+      },
+      "decision_basis": "先明确当前问题与必要用户上下文。",
+      "observation": {
+        "ok": true,
+        "request": {
+          "request_id": "search_failure",
+          "question": "报销期限是多久？",
+          "history": [],
+          "applicable_doc_id": null,
+          "scope": null
+        },
+        "intent": {
+          "claim_key": "reimbursement_deadline",
+          "topic_candidates": [
+            "reimbursement_deadline"
+          ],
+          "needs_topic_clarification": false,
+          "used_user_history": false,
+          "resolved_question": "报销期限是多久？",
+          "suggested_query": "报销 期限"
+        },
+        "supported_topics": {
+          "reimbursement_deadline": {
+            "label": "报销提交期限",
+            "query": "报销 期限",
+            "domain": "报销"
+          },
+          "reimbursement_materials": {
+            "label": "报销所需材料",
+            "query": "报销 材料",
+            "domain": "报销"
+          },
+          "annual_leave": {
+            "label": "年度带薪年假",
+            "query": "年假 天数",
+            "domain": "年假"
+          },
+          "export_resolution": {
+            "label": "产品导出分辨率",
+            "query": "导出 分辨率",
+            "domain": "导出"
+          }
+        },
+        "conversation_is_evidence": false
+      },
+      "next_action": "search_documents"
+    },
+    {
+      "step": 2,
+      "tool": "search_documents",
+      "arguments": {
+        "query": "报销期限是多久？",
+        "strategy": "keyword",
+        "limit": 10,
+        "reason": "先按当前问题检索原始资料。"
+      },
+      "decision_basis": "先按当前问题检索原始资料。",
+      "observation": {
+        "ok": false,
+        "error": "search_failed"
+      },
+      "next_action": "stop"
+    },
+    {
+      "step": 3,
+      "tool": "stop",
+      "arguments": {
+        "outcome": "tool_failure",
+        "reason": "工具失败，不能编造缺失的检索或原文结果。"
+      },
+      "decision_basis": "工具失败，不能编造缺失的检索或原文结果。",
+      "observation": {
+        "ok": true,
+        "status": "failed",
+        "answer": "检索或读取工具失败，尚不能完成可靠核实。",
+        "citations": [],
+        "conflicts": [],
+        "gaps": [
+          "需要恢复失败工具并重新核实资料。"
+        ],
+        "clarification": null
+      },
+      "next_action": "end"
+    }
+  ]
+}

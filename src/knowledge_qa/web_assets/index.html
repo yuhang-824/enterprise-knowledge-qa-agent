@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>企业知识问答 · 证据验证台</title><link rel="stylesheet" href="/assets/app.css"><script src="/assets/app.js" defer></script></head>
+<body>
+  <aside class="sidebar"><a class="brand" href="/" aria-label="知识问答首页"><span class="brand-mark">K<span>↗</span></span><span>Knowledge<small>企业知识问答</small></span></a><div class="nav-caption">验证工作空间</div><button class="nav-item active" id="nav-work"><span>▦</span>知识问答<span class="nav-dot"></span></button><button class="nav-item" id="nav-history"><span>◷</span>问答记录</button><button class="nav-item" id="view-corpus"><span>▤</span>查看知识库</button><div class="sidebar-bottom"><span class="connection-dot"></span>本机运行<small>所有资料均为合成示例</small></div></aside>
+  <main><header class="topbar"><span>工作空间 <span class="slash">/</span> 知识问答</span><span class="tag" id="mode-tag">正在连接…</span></header>
+    <div class="page"><div class="heading"><div><div class="eyebrow">ENTERPRISE KNOWLEDGE QA</div><h1>每一个答案，都有原文依据。</h1><p>检索制度、核对引用，在资料冲突时先查证，再回答。</p></div><span class="project-label">项目 03 <span>AI Agent</span></span></div>
+      <div class="mode-notice"><span class="notice-icon">i</span><span id="mode-notice">离线 Mock 模式：验证检索、冲突与引用边界，不代表真实模型决策效果。</span></div>
+      <div class="preset-row"><span>快速验证</span><button class="preset selected" data-case="document_conflict">文档冲突</button><button class="preset" data-case="clear_answer">明确答案</button><button class="preset" data-case="paraphrase">改写问题</button><button class="preset" data-case="context_followup">上下文追问</button><button class="preset" data-case="out_of_corpus">资料外问题</button><button class="preset" data-case="tool_failure">工具失败</button><button class="preset" data-case="changed_source">替换原文</button></div>
+      <div class="workspace" id="work-area"><section class="card form-card"><div class="card-heading"><h2>提出一个问题</h2><span class="mini-label">01 / 提问</span></div>
+        <form id="question-form"><label for="question">问题</label><textarea id="question" rows="3" maxlength="2000" required>报销期限是多久？</textarea>
+          <label for="case">资料与验证场景</label><select id="case"></select><p class="field-help" id="case-help">D01规定30天，D02规定15天；未给定适用范围或优先级。</p>
+          <div class="input-grid"><div><label for="selected-doc">适用制度 <span class="muted">/ 可选</span></label><select id="selected-doc"><option value="">尚未确认</option><option>D01</option><option>D02</option><option>D03</option><option>D04</option><option>D99</option></select></div><div><label for="scope">员工范围 <span class="muted">/ 可选</span></label><select id="scope"><option value="">尚未确认</option><option>总部</option><option>分公司</option></select></div></div>
+          <label class="history-toggle" for="use-history"><input id="use-history" type="checkbox">带入用户问题上下文</label><div id="context-note" class="context-note">未带入对话历史。历史回答不会作为引用证据。</div><button class="text-button" id="clear-context" type="button">清空上下文</button>
+          <div class="limit-field"><label for="max-steps">工具执行步数上限</label><input id="max-steps" type="number" min="1" max="200" value="24"></div>
+          <button class="button primary" id="ask-button" type="submit"><span>检索并核实答案</span><span>↗</span></button><p class="form-footer">日期不是优先级；未确认的冲突不会被擅自消解。</p>
+        </form>
+      </section>
+      <section id="result-area" class="result-area" aria-live="polite" aria-busy="false">
+        <div class="metrics"><div class="metric card"><span>任务状态</span><strong id="metric-status">等待提问</strong><small id="metric-mode">先检索，再核实</small></div><div class="metric card"><span>引用文档</span><strong><b id="metric-citations">—</b><em>份</em></strong><small>每条引用均保留原文</small></div><div class="metric card"><span>已读原文</span><strong><b id="metric-read">—</b><em>段</em></strong><small>检索预览不能直接作答</small></div><div class="metric card"><span>执行步骤</span><strong><b id="metric-steps">—</b><em>步</em></strong><small id="metric-limit">默认上限 24 步</small></div></div>
+        <div id="error-banner" class="error-banner" hidden></div>
+        <section class="card answer-card"><div class="card-heading"><h2>回答与待确认项</h2><span class="mini-label" id="answer-source">02 / 核实</span></div><div id="answer-body"><div class="empty-state"><div class="empty-symbol">“</div><h3>让答案回到资料本身</h3><p>试试默认冲突用例，查看两份制度的原文差异。</p></div></div><div class="result-actions"><button class="button secondary" id="ask-again" disabled>重新核实</button><button class="text-button" id="download" disabled>下载完整结果 ↓</button></div></section>
+        <section class="card citations-card"><div class="card-heading"><h2>引用与原文</h2><span class="mini-label" id="citation-note">03 / 证据</span></div><div id="citations"><div class="detail-placeholder">回答形成后，这里会展示文档 ID、版本日期和支持答案的原文。</div></div></section>
+        <section class="card detail-card"><div class="tabs" role="tablist" aria-label="运行详情"><button class="tab active" data-tab="trace" role="tab" aria-selected="true">执行记录 <span id="trace-count">0</span></button><button class="tab" data-tab="gaps" role="tab" aria-selected="false">资料缺口</button><button class="tab" data-tab="json" role="tab" aria-selected="false">原始 JSON</button></div><div class="tab-panel" id="panel-trace"><div class="detail-placeholder">显示实际动作、参数、返回与下一步。</div></div><div class="tab-panel" id="panel-gaps" hidden><div class="detail-placeholder">尚无核验结果。</div></div><div class="tab-panel" id="panel-json" hidden><pre id="raw-json">尚无运行结果。</pre></div></section>
+      </section></div>
+      <section class="card history-card" id="history-area"><div class="card-heading"><div><h2>最近问答</h2><p>历史记录保留当时的引用快照。</p></div><button class="text-button" id="refresh-history">刷新 ↻</button></div><div id="history-list"><div class="detail-placeholder">还没有问答记录。</div></div></section>
+      <footer class="page-footer"><span>企业知识问答 Agent · 本机证据验证台</span><span>有依据才回答，有冲突先确认。</span></footer>
+    </div>
+  </main>
+  <dialog id="corpus-dialog"><div class="card-heading"><div><h2>当前场景知识库</h2><p class="field-help" id="corpus-version"></p></div><button class="text-button" id="close-corpus" aria-label="关闭知识库">✕</button></div><div id="corpus-documents"></div></dialog>
+</body></html>

@@ -1,0 +1,68 @@
+UTC: 2026-10-31T04:06:52+00:00
+Command: python -m unittest discover -s tests -v
+Exit code: 0
+
+test_cli_conflict (test_qa.CLITests.test_cli_conflict) ... ok
+test_cli_input_error (test_qa.CLITests.test_cli_input_error) ... ok
+test_cli_limit (test_qa.CLITests.test_cli_limit) ... ok
+test_cli_missing_key (test_qa.CLITests.test_cli_missing_key) ... ok
+test_abstain_requires_supplemental_search (test_qa.QATests.test_abstain_requires_supplemental_search) ... ok
+test_annual_leave_and_export (test_qa.QATests.test_annual_leave_and_export) ... ok
+test_assistant_history_is_not_evidence (test_qa.QATests.test_assistant_history_is_not_evidence) ... ok
+test_cannot_cherry_pick_only_one_conflicting_source (test_qa.QATests.test_cannot_cherry_pick_only_one_conflicting_source) ... ok
+test_changed_conflicting_content_changes_action (test_qa.QATests.test_changed_conflicting_content_changes_action) ... ok
+test_changed_content_changes_answer (test_qa.QATests.test_changed_content_changes_answer) ... ok
+test_clear_answer_and_exact_quote (test_qa.QATests.test_clear_answer_and_exact_quote) ... ok
+test_conflict_blocks_answer_even_with_latest_citation (test_qa.QATests.test_conflict_blocks_answer_even_with_latest_citation) ... ok
+test_conflict_not_resolved_by_newer_date (test_qa.QATests.test_conflict_not_resolved_by_newer_date) ... ok
+test_context_followup_materials (test_qa.QATests.test_context_followup_materials) ... ok
+test_context_missing_requests_topic (test_qa.QATests.test_context_missing_requests_topic) ... ok
+test_cyclic_precedence_requests_confirmation (test_qa.QATests.test_cyclic_precedence_requests_confirmation) ... ok
+test_explicit_precedence_in_actual_text (test_qa.QATests.test_explicit_precedence_in_actual_text) ... ok
+test_explicit_user_document_selection (test_qa.QATests.test_explicit_user_document_selection) ... ok
+test_export_failure_is_not_resolution_limit (test_qa.QATests.test_export_failure_is_not_resolution_limit) ... ok
+test_failure_does_not_hide_potential_conflict (test_qa.QATests.test_failure_does_not_hide_potential_conflict) ... ok
+test_forged_source_id_rejected (test_qa.QATests.test_forged_source_id_rejected) ... ok
+test_history_cannot_select_document (test_qa.QATests.test_history_cannot_select_document) ... ok
+test_invalid_corpus_and_request_rejected (test_qa.QATests.test_invalid_corpus_and_request_rejected) ... ok
+test_leave_application_is_not_leave_allowance (test_qa.QATests.test_leave_application_is_not_leave_allowance) ... ok
+test_materials_followup_after_leave_does_not_answer_days (test_qa.QATests.test_materials_followup_after_leave_does_not_answer_days) ... ok
+test_model_cannot_change_applicable_document (test_qa.QATests.test_model_cannot_change_applicable_document) ... ok
+test_model_cannot_supply_arbitrary_answer (test_qa.QATests.test_model_cannot_supply_arbitrary_answer) ... ok
+test_model_error_is_not_mock_fallback (test_qa.QATests.test_model_error_is_not_mock_fallback) ... ok
+test_multiple_topics_requests_clarification (test_qa.QATests.test_multiple_topics_requests_clarification) ... ok
+test_negated_example_is_not_fact (test_qa.QATests.test_negated_example_is_not_fact) ... ok
+test_no_answer_without_check (test_qa.QATests.test_no_answer_without_check) ... ok
+test_no_evidence_failure_stop_rejected (test_qa.QATests.test_no_evidence_failure_stop_rejected) ... ok
+test_observation_returned_to_model (test_qa.QATests.test_observation_returned_to_model) ... ok
+test_out_of_corpus_abstains (test_qa.QATests.test_out_of_corpus_abstains) ... ok
+test_paraphrase_supplemental_search (test_qa.QATests.test_paraphrase_supplemental_search) ... ok
+test_prompt_injection_text_does_not_grant_answer (test_qa.QATests.test_prompt_injection_text_does_not_grant_answer) ... ok
+test_read_failure_reports_failed (test_qa.QATests.test_read_failure_reports_failed) ... ok
+test_reimbursement_processing_time_is_not_submission_deadline (test_qa.QATests.test_reimbursement_processing_time_is_not_submission_deadline) ... ok
+test_related_unsupported_document_not_silently_ignored (test_qa.QATests.test_related_unsupported_document_not_silently_ignored) ... ok
+test_scope_requires_clarification_and_explicit_selection (test_qa.QATests.test_scope_requires_clarification_and_explicit_selection) ... ok
+test_search_failure (test_qa.QATests.test_search_failure) ... ok
+test_search_preview_not_enough (test_qa.QATests.test_search_preview_not_enough) ... ok
+test_snapshot_consistency (test_qa.QATests.test_snapshot_consistency) ... ok
+test_step_limit_incomplete_retains_trace (test_qa.QATests.test_step_limit_incomplete_retains_trace) ... ok
+test_unsearched_document_read_rejected (test_qa.QATests.test_unsearched_document_read_rejected) ... ok
+test_wrong_chunk_citation_rejected (test_qa.QATests.test_wrong_chunk_citation_rejected) ... ok
+test_wrong_claim_key_rejected (test_qa.QATests.test_wrong_claim_key_rejected) ... ok
+test_native_protocol (test_qa.TransportTests.test_native_protocol) ... ok
+test_real_mode_missing_key (test_qa.TransportTests.test_real_mode_missing_key) ... ok
+test_changed_source_is_read_as_45_days (test_web.WebTests.test_changed_source_is_read_as_45_days) ... ok
+test_conflict_then_user_confirmation (test_web.WebTests.test_conflict_then_user_confirmation) ... ok
+test_corpus_endpoint_matches_selected_case (test_web.WebTests.test_corpus_endpoint_matches_selected_case) ... ok
+test_history_and_source_snapshot (test_web.WebTests.test_history_and_source_snapshot) ... ok
+test_invalid_input_and_case (test_web.WebTests.test_invalid_input_and_case) ... ok
+test_local_only_and_file_boundaries (test_web.WebTests.test_local_only_and_file_boundaries) ... ok
+test_page_assets_and_config (test_web.WebTests.test_page_assets_and_config) ... ok
+test_paraphrase_and_followup (test_web.WebTests.test_paraphrase_and_followup) ... ok
+test_tool_failure_not_falsely_answered (test_web.WebTests.test_tool_failure_not_falsely_answered) ... ok
+test_updated_file_is_loaded_on_next_request (test_web.WebTests.test_updated_file_is_loaded_on_next_request) ... ok
+
+----------------------------------------------------------------------
+Ran 59 tests in 5.951s
+
+OK

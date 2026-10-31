@@ -1,0 +1,12 @@
+{
+  "request_id": "context_followup",
+  "question": "那需要哪些材料？",
+  "history": [
+    {
+      "role": "user",
+      "content": "报销期限是多久？"
+    }
+  ],
+  "applicable_doc_id": null,
+  "scope": null
+}

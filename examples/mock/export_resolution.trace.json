@@ -1,0 +1,206 @@
+{
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "inspect_question",
+      "arguments": {
+        "reason": "先明确当前问题与必要用户上下文。"
+      },
+      "decision_basis": "先明确当前问题与必要用户上下文。",
+      "observation": {
+        "ok": true,
+        "request": {
+          "request_id": "export_resolution",
+          "question": "最高能导出什么分辨率？",
+          "history": [],
+          "applicable_doc_id": null,
+          "scope": null
+        },
+        "intent": {
+          "claim_key": "export_resolution",
+          "topic_candidates": [
+            "export_resolution"
+          ],
+          "needs_topic_clarification": false,
+          "used_user_history": false,
+          "resolved_question": "最高能导出什么分辨率？",
+          "suggested_query": "导出 分辨率"
+        },
+        "supported_topics": {
+          "reimbursement_deadline": {
+            "label": "报销提交期限",
+            "query": "报销 期限",
+            "domain": "报销"
+          },
+          "reimbursement_materials": {
+            "label": "报销所需材料",
+            "query": "报销 材料",
+            "domain": "报销"
+          },
+          "annual_leave": {
+            "label": "年度带薪年假",
+            "query": "年假 天数",
+            "domain": "年假"
+          },
+          "export_resolution": {
+            "label": "产品导出分辨率",
+            "query": "导出 分辨率",
+            "domain": "导出"
+          }
+        },
+        "conversation_is_evidence": false
+      },
+      "next_action": "search_documents"
+    },
+    {
+      "step": 2,
+      "tool": "search_documents",
+      "arguments": {
+        "query": "最高能导出什么分辨率？",
+        "strategy": "keyword",
+        "limit": 10,
+        "reason": "先按当前问题检索原始资料。"
+      },
+      "decision_basis": "先按当前问题检索原始资料。",
+      "observation": {
+        "ok": true,
+        "hits": [
+          {
+            "doc_id": "D04",
+            "title": "视频产品导出FAQ",
+            "version_date": "2025-08-01",
+            "scope": null,
+            "score": 2,
+            "snippets": [
+              {
+                "chunk_id": "C01",
+                "preview": "最高导出分辨率为1080p。此限制针对本合成FAQ所述的基础版本。"
+              }
+            ]
+          }
+        ],
+        "total": 1,
+        "has_more": false,
+        "strategy": "keyword",
+        "effective_query": "最高能导出什么分辨率？",
+        "suggested_query": "导出 分辨率"
+      },
+      "next_action": "read_snippet"
+    },
+    {
+      "step": 3,
+      "tool": "read_snippet",
+      "arguments": {
+        "doc_id": "D04",
+        "chunk_id": "C01",
+        "reason": "读取检索命中的原文，建立可核验引用。"
+      },
+      "decision_basis": "读取检索命中的原文，建立可核验引用。",
+      "observation": {
+        "ok": true,
+        "source": {
+          "source_id": "D04:C01:96935b49f454",
+          "doc_id": "D04",
+          "chunk_id": "C01",
+          "title": "视频产品导出FAQ",
+          "version_date": "2025-08-01",
+          "scope": null,
+          "content_hash": "96935b49f4544ff98301044b70c59b24820e28de80e425996a4663828d91bdff",
+          "quote": "最高导出分辨率为1080p。此限制针对本合成FAQ所述的基础版本。",
+          "claims": [
+            {
+              "key": "export_resolution",
+              "value": "1080p",
+              "unit": "",
+              "supporting_quote": "最高导出分辨率为1080p",
+              "supersedes": []
+            }
+          ]
+        },
+        "cached": false
+      },
+      "next_action": "check_evidence"
+    },
+    {
+      "step": 4,
+      "tool": "check_evidence",
+      "arguments": {
+        "reason": "原文已读取，核对覆盖、适用范围和结论冲突。"
+      },
+      "decision_basis": "原文已读取，核对覆盖、适用范围和结论冲突。",
+      "observation": {
+        "ok": true,
+        "assessment": {
+          "status": "supported",
+          "claim_key": "export_resolution",
+          "missing_snippets": [],
+          "citations": [
+            {
+              "source_id": "D04:C01:96935b49f454",
+              "doc_id": "D04",
+              "chunk_id": "C01",
+              "title": "视频产品导出FAQ",
+              "version_date": "2025-08-01",
+              "scope": null,
+              "content_hash": "96935b49f4544ff98301044b70c59b24820e28de80e425996a4663828d91bdff",
+              "quote": "最高导出分辨率为1080p。此限制针对本合成FAQ所述的基础版本。",
+              "claim_key": "export_resolution",
+              "value": "1080p",
+              "unit": "",
+              "supporting_quote": "最高导出分辨率为1080p"
+            }
+          ],
+          "conflicts": [],
+          "gaps": [],
+          "supporting_source_ids": [
+            "D04:C01:96935b49f454"
+          ],
+          "value": "1080p",
+          "unit": ""
+        },
+        "suggested_query": "导出 分辨率"
+      },
+      "next_action": "answer_question"
+    },
+    {
+      "step": 5,
+      "tool": "answer_question",
+      "arguments": {
+        "claim_key": "export_resolution",
+        "source_ids": [
+          "D04:C01:96935b49f454"
+        ],
+        "reason": "已读原文支持同一结论，按核验后的引用作答。"
+      },
+      "decision_basis": "已读原文支持同一结论，按核验后的引用作答。",
+      "observation": {
+        "ok": true,
+        "status": "answered",
+        "answer": "依据已核验的资料，产品导出分辨率为1080p。",
+        "citations": [
+          {
+            "source_id": "D04:C01:96935b49f454",
+            "doc_id": "D04",
+            "chunk_id": "C01",
+            "title": "视频产品导出FAQ",
+            "version_date": "2025-08-01",
+            "scope": null,
+            "content_hash": "96935b49f4544ff98301044b70c59b24820e28de80e425996a4663828d91bdff",
+            "quote": "最高导出分辨率为1080p。此限制针对本合成FAQ所述的基础版本。",
+            "claim_key": "export_resolution",
+            "value": "1080p",
+            "unit": "",
+            "supporting_quote": "最高导出分辨率为1080p"
+          }
+        ],
+        "gaps": [],
+        "conflicts": [],
+        "clarification": null
+      },
+      "next_action": "end"
+    }
+  ]
+}

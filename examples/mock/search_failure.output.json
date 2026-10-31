@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-31T04:06:52+00:00",
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "requested_model": "offline-evidence-policy-v1",
+  "corpus_version": "synthetic-kb-v1",
+  "corpus_digest": "2979d326a27f5f73988c7a968112c830e197b95cc608091e67ae5b0d4b2f793a",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "steps_taken": 3,
+  "max_steps": 24,
+  "stop_reason": "model_concluded:failed",
+  "model_api_usage": null,
+  "request": {
+    "request_id": "search_failure",
+    "question": "报销期限是多久？",
+    "history": [],
+    "applicable_doc_id": null,
+    "scope": null
+  },
+  "intent": {
+    "claim_key": "reimbursement_deadline",
+    "topic_candidates": [
+      "reimbursement_deadline"
+    ],
+    "needs_topic_clarification": false,
+    "used_user_history": false,
+    "resolved_question": "报销期限是多久？",
+    "suggested_query": "报销 期限"
+  },
+  "searches": [],
+  "sources_read": [],
+  "assessment": null,
+  "tool_errors": [
+    {
+      "tool": "search_documents",
+      "doc_id": null,
+      "error": "injected_tool_failure"
+    }
+  ],
+  "status": "failed",
+  "answer": "检索或读取工具失败，尚不能完成可靠核实。",
+  "citations": [],
+  "conflicts": [],
+  "gaps": [
+    "需要恢复失败工具并重新核实资料。"
+  ],
+  "clarification": null
+}

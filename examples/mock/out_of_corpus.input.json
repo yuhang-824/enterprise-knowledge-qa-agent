@@ -1,0 +1,7 @@
+{
+  "request_id": "out_of_corpus",
+  "question": "公司明年股票价格是多少？",
+  "history": [],
+  "applicable_doc_id": null,
+  "scope": null
+}

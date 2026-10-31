@@ -1,0 +1,293 @@
+{
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "inspect_question",
+      "arguments": {
+        "reason": "先明确当前问题与必要用户上下文。"
+      },
+      "decision_basis": "先明确当前问题与必要用户上下文。",
+      "observation": {
+        "ok": true,
+        "request": {
+          "request_id": "explicit_precedence",
+          "question": "报销期限是多久？",
+          "history": [],
+          "applicable_doc_id": null,
+          "scope": null
+        },
+        "intent": {
+          "claim_key": "reimbursement_deadline",
+          "topic_candidates": [
+            "reimbursement_deadline"
+          ],
+          "needs_topic_clarification": false,
+          "used_user_history": false,
+          "resolved_question": "报销期限是多久？",
+          "suggested_query": "报销 期限"
+        },
+        "supported_topics": {
+          "reimbursement_deadline": {
+            "label": "报销提交期限",
+            "query": "报销 期限",
+            "domain": "报销"
+          },
+          "reimbursement_materials": {
+            "label": "报销所需材料",
+            "query": "报销 材料",
+            "domain": "报销"
+          },
+          "annual_leave": {
+            "label": "年度带薪年假",
+            "query": "年假 天数",
+            "domain": "年假"
+          },
+          "export_resolution": {
+            "label": "产品导出分辨率",
+            "query": "导出 分辨率",
+            "domain": "导出"
+          }
+        },
+        "conversation_is_evidence": false
+      },
+      "next_action": "search_documents"
+    },
+    {
+      "step": 2,
+      "tool": "search_documents",
+      "arguments": {
+        "query": "报销期限是多久？",
+        "strategy": "keyword",
+        "limit": 10,
+        "reason": "先按当前问题检索原始资料。"
+      },
+      "decision_basis": "先按当前问题检索原始资料。",
+      "observation": {
+        "ok": true,
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "员工费用报销制度",
+            "version_date": "2025-01-01",
+            "scope": null,
+            "score": 2,
+            "snippets": [
+              {
+                "chunk_id": "C01",
+                "preview": "报销提交期限为30天。员工应在业务发生后提交申请。"
+              },
+              {
+                "chunk_id": "C02",
+                "preview": "报销所需材料为电子发票和审批记录。材料完整后提交财务审核。"
+              }
+            ]
+          },
+          {
+            "doc_id": "D02",
+            "title": "费用报销补充规定",
+            "version_date": "2025-06-01",
+            "scope": null,
+            "score": 2,
+            "snippets": [
+              {
+                "chunk_id": "C01",
+                "preview": "报销提交期限为15天。逾期申请需说明原因。本条款明确替代D01。"
+              }
+            ]
+          }
+        ],
+        "total": 2,
+        "has_more": false,
+        "strategy": "keyword",
+        "effective_query": "报销期限是多久？",
+        "suggested_query": "报销 期限"
+      },
+      "next_action": "read_snippet"
+    },
+    {
+      "step": 3,
+      "tool": "read_snippet",
+      "arguments": {
+        "doc_id": "D01",
+        "chunk_id": "C01",
+        "reason": "读取检索命中的原文，建立可核验引用。"
+      },
+      "decision_basis": "读取检索命中的原文，建立可核验引用。",
+      "observation": {
+        "ok": true,
+        "source": {
+          "source_id": "D01:C01:23548131b481",
+          "doc_id": "D01",
+          "chunk_id": "C01",
+          "title": "员工费用报销制度",
+          "version_date": "2025-01-01",
+          "scope": null,
+          "content_hash": "23548131b48164ead94c6eb9e9d553b8edf67eaa082118dffd61058f23dce680",
+          "quote": "报销提交期限为30天。员工应在业务发生后提交申请。",
+          "claims": [
+            {
+              "key": "reimbursement_deadline",
+              "value": "30",
+              "unit": "天",
+              "supporting_quote": "报销提交期限为30天",
+              "supersedes": []
+            }
+          ]
+        },
+        "cached": false
+      },
+      "next_action": "read_snippet"
+    },
+    {
+      "step": 4,
+      "tool": "read_snippet",
+      "arguments": {
+        "doc_id": "D01",
+        "chunk_id": "C02",
+        "reason": "读取检索命中的原文，建立可核验引用。"
+      },
+      "decision_basis": "读取检索命中的原文，建立可核验引用。",
+      "observation": {
+        "ok": true,
+        "source": {
+          "source_id": "D01:C02:2afc265118f0",
+          "doc_id": "D01",
+          "chunk_id": "C02",
+          "title": "员工费用报销制度",
+          "version_date": "2025-01-01",
+          "scope": null,
+          "content_hash": "2afc265118f01824d76e009c6a9ab276a28adea880072330d93019ea787983eb",
+          "quote": "报销所需材料为电子发票和审批记录。材料完整后提交财务审核。",
+          "claims": [
+            {
+              "key": "reimbursement_materials",
+              "value": "电子发票和审批记录",
+              "unit": "",
+              "supporting_quote": "报销所需材料为电子发票和审批记录",
+              "supersedes": []
+            }
+          ]
+        },
+        "cached": false
+      },
+      "next_action": "read_snippet"
+    },
+    {
+      "step": 5,
+      "tool": "read_snippet",
+      "arguments": {
+        "doc_id": "D02",
+        "chunk_id": "C01",
+        "reason": "读取检索命中的原文，建立可核验引用。"
+      },
+      "decision_basis": "读取检索命中的原文，建立可核验引用。",
+      "observation": {
+        "ok": true,
+        "source": {
+          "source_id": "D02:C01:cf3c29b63880",
+          "doc_id": "D02",
+          "chunk_id": "C01",
+          "title": "费用报销补充规定",
+          "version_date": "2025-06-01",
+          "scope": null,
+          "content_hash": "cf3c29b63880a41ca51a680437ae91e9e017e60aa6c83f07f605b5e67228494b",
+          "quote": "报销提交期限为15天。逾期申请需说明原因。本条款明确替代D01。",
+          "claims": [
+            {
+              "key": "reimbursement_deadline",
+              "value": "15",
+              "unit": "天",
+              "supporting_quote": "报销提交期限为15天",
+              "supersedes": [
+                "D01"
+              ]
+            }
+          ]
+        },
+        "cached": false
+      },
+      "next_action": "check_evidence"
+    },
+    {
+      "step": 6,
+      "tool": "check_evidence",
+      "arguments": {
+        "reason": "原文已读取，核对覆盖、适用范围和结论冲突。"
+      },
+      "decision_basis": "原文已读取，核对覆盖、适用范围和结论冲突。",
+      "observation": {
+        "ok": true,
+        "assessment": {
+          "status": "supported",
+          "claim_key": "reimbursement_deadline",
+          "missing_snippets": [],
+          "citations": [
+            {
+              "source_id": "D02:C01:cf3c29b63880",
+              "doc_id": "D02",
+              "chunk_id": "C01",
+              "title": "费用报销补充规定",
+              "version_date": "2025-06-01",
+              "scope": null,
+              "content_hash": "cf3c29b63880a41ca51a680437ae91e9e017e60aa6c83f07f605b5e67228494b",
+              "quote": "报销提交期限为15天。逾期申请需说明原因。本条款明确替代D01。",
+              "claim_key": "reimbursement_deadline",
+              "value": "15",
+              "unit": "天",
+              "supporting_quote": "报销提交期限为15天"
+            }
+          ],
+          "conflicts": [],
+          "gaps": [],
+          "supporting_source_ids": [
+            "D02:C01:cf3c29b63880"
+          ],
+          "value": "15",
+          "unit": "天"
+        },
+        "suggested_query": "报销 期限"
+      },
+      "next_action": "answer_question"
+    },
+    {
+      "step": 7,
+      "tool": "answer_question",
+      "arguments": {
+        "claim_key": "reimbursement_deadline",
+        "source_ids": [
+          "D02:C01:cf3c29b63880"
+        ],
+        "reason": "已读原文支持同一结论，按核验后的引用作答。"
+      },
+      "decision_basis": "已读原文支持同一结论，按核验后的引用作答。",
+      "observation": {
+        "ok": true,
+        "status": "answered",
+        "answer": "依据已核验的资料，报销提交期限为15天。",
+        "citations": [
+          {
+            "source_id": "D02:C01:cf3c29b63880",
+            "doc_id": "D02",
+            "chunk_id": "C01",
+            "title": "费用报销补充规定",
+            "version_date": "2025-06-01",
+            "scope": null,
+            "content_hash": "cf3c29b63880a41ca51a680437ae91e9e017e60aa6c83f07f605b5e67228494b",
+            "quote": "报销提交期限为15天。逾期申请需说明原因。本条款明确替代D01。",
+            "claim_key": "reimbursement_deadline",
+            "value": "15",
+            "unit": "天",
+            "supporting_quote": "报销提交期限为15天"
+          }
+        ],
+        "gaps": [],
+        "conflicts": [],
+        "clarification": null
+      },
+      "next_action": "end"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "execution_mode": "mock",
+  "model": "offline-evidence-policy-v1",
+  "evidence_boundary": "Mock verifies workflow, retrieval and citation guards only; not real model decision quality.",
+  "trace": [
+    {
+      "step": 1,
+      "tool": "inspect_question",
+      "arguments": {
+        "reason": "先明确当前问题与必要用户上下文。"
+      },
+      "decision_basis": "先明确当前问题与必要用户上下文。",
+      "observation": {
+        "ok": true,
+        "request": {
+          "request_id": "out_of_corpus",
+          "question": "公司明年股票价格是多少？",
+          "history": [],
+          "applicable_doc_id": null,
+          "scope": null
+        },
+        "intent": {
+          "claim_key": null,
+          "topic_candidates": [],
+          "needs_topic_clarification": false,
+          "used_user_history": false,
+          "resolved_question": "公司明年股票价格是多少？",
+          "suggested_query": "公司明年股票价格是多少？"
+        },
+        "supported_topics": {
+          "reimbursement_deadline": {
+            "label": "报销提交期限",
+            "query": "报销 期限",
+            "domain": "报销"
+          },
+          "reimbursement_materials": {
+            "label": "报销所需材料",
+            "query": "报销 材料",
+            "domain": "报销"
+          },
+          "annual_leave": {
+            "label": "年度带薪年假",
+            "query": "年假 天数",
+            "domain": "年假"
+          },
+          "export_resolution": {
+            "label": "产品导出分辨率",
+            "query": "导出 分辨率",
+            "domain": "导出"
+          }
+        },
+        "conversation_is_evidence": false
+      },
+      "next_action": "search_documents"
+    },
+    {
+      "step": 2,
+      "tool": "search_documents",
+      "arguments": {
+        "query": "公司明年股票价格是多少？",
+        "strategy": "keyword",
+        "limit": 10,
+        "reason": "先按当前问题检索原始资料。"
+      },
+      "decision_basis": "先按当前问题检索原始资料。",
+      "observation": {
+        "ok": true,
+        "hits": [],
+        "total": 0,
+        "has_more": false,
+        "strategy": "keyword",
+        "effective_query": "公司明年股票价格是多少？",
+        "suggested_query": "公司明年股票价格是多少？"
+      },
+      "next_action": "search_documents"
+    },
+    {
+      "step": 3,
+      "tool": "search_documents",
+      "arguments": {
+        "query": "公司明年股票价格是多少？",
+        "strategy": "expanded",
+        "limit": 10,
+        "reason": "首次无结果，改写为制度术语并扩展检索。"
+      },
+      "decision_basis": "首次无结果，改写为制度术语并扩展检索。",
+      "observation": {
+        "ok": true,
+        "hits": [],
+        "total": 0,
+        "has_more": false,
+        "strategy": "expanded",
+        "effective_query": "公司明年股票价格是多少？",
+        "suggested_query": "公司明年股票价格是多少？"
+      },
+      "next_action": "check_evidence"
+    },
+    {
+      "step": 4,
+      "tool": "check_evidence",
+      "arguments": {
+        "reason": "原文已读取，核对覆盖、适用范围和结论冲突。"
+      },
+      "decision_basis": "原文已读取，核对覆盖、适用范围和结论冲突。",
+      "observation": {
+        "ok": true,
+        "assessment": {
+          "status": "insufficient",
+          "claim_key": null,
+          "missing_snippets": [],
+          "citations": [],
+          "conflicts": [],
+          "gaps": [
+            "现有知识库没有支持该问题的可核实资料。"
+          ],
+          "supporting_source_ids": []
+        },
+        "suggested_query": "公司明年股票价格是多少？"
+      },
+      "next_action": "stop"
+    },
+    {
+      "step": 5,
+      "tool": "stop",
+      "arguments": {
+        "outcome": "insufficient_evidence",
+        "reason": "已补充检索并核对，资料仍不足，明确拒绝猜测。"
+      },
+      "decision_basis": "已补充检索并核对，资料仍不足，明确拒绝猜测。",
+      "observation": {
+        "ok": true,
+        "status": "insufficient_evidence",
+        "answer": "现有资料不足以可靠回答该问题。",
+        "citations": [],
+        "conflicts": [],
+        "gaps": [
+          "现有知识库没有支持该问题的可核实资料。"
+        ],
+        "clarification": null
+      },
+      "next_action": "end"
+    }
+  ]
+}
